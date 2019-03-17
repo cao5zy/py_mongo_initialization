@@ -1,3 +1,5 @@
-{
-    "description": "this is a test file"
-}
+[
+    {"collection": "a",
+     "items": [{"field1": "a"}, {"field1": "b"}]
+    }
+]

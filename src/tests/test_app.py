@@ -1,4 +1,4 @@
-from app import get_collection_name, get_data_file
+from app import get_collection_name, get_data_file, get_data
 from assertpy import assert_that
 from codegenhelper import init_test_folder, remove_test_folder, test_root
 from nose import with_setup
@@ -23,3 +23,10 @@ def test_get_data_file_will_cause_error():
 
 def test_get_collection_name():
     assert_that(get_collection_name('/data/hello.json')).is_equal_to('hello')    
+
+def load_for_get_data():
+    load_resource('get_data_file')
+
+@with_setup(load_for_get_data, remove_test_folder)
+def test_get_data():
+    assert_that(get_data(get_data_file(os.path.join(test_root(), 'get_data_file')))).is_not_empty()
