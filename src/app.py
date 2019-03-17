@@ -15,7 +15,7 @@ def get_data_file(folderpath = "/data/"):
     return dumy(list(filter(lambda n:re.match(r'^.*\.json$', n) != None,  os.listdir(folderpath))))
     
 
-def get_collection_name(data_file):
+def get_db_name(data_file):
     assert_that(data_file).matches(r'^(/[^/ ]*)+/?$')
     try:
         (_, filename) = os.path.split(data_file)
@@ -38,10 +38,13 @@ def get_data(filepath):
 
 def write_data(conn, db_name,  data_arr):
     list([conn[db_name][data['collection']].insert_one(data['items']) for data in data_arr])
-    
+
+def get_db():
+    pass
+
 def main():
     (F(get_data)>> \
-     F(write_data, Db, get_collection_name(get_data_file())))(get_data_file())
+     F(write_data, get_db(), get_db_name(get_data_file())))(get_data_file())
 
 if __name__ == '__main__':
     main()

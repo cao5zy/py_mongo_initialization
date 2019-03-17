@@ -1,4 +1,4 @@
-from app import get_collection_name, get_data_file, get_data
+from app import get_db_name, get_data_file, get_data
 from assertpy import assert_that
 from codegenhelper import init_test_folder, remove_test_folder, test_root
 from nose import with_setup
@@ -21,8 +21,8 @@ def test_get_data_file():
 def test_get_data_file_will_cause_error():
     assert_that(get_data_file).raises(AssertionError).when_called_with(os.path.join(test_root(), 'get_data_file_error_case'))
 
-def test_get_collection_name():
-    assert_that(get_collection_name('/data/hello.json')).is_equal_to('hello')    
+def test_get_db_name():
+    assert_that(get_db_name('/data/hello.json')).is_equal_to('hello')    
 
 def load_for_get_data():
     load_resource('get_data_file')
