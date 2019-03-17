@@ -3,6 +3,8 @@ from assertpy import assert_that
 import os
 import re
 import demjson
+from config import cfg
+from pymongo import MongoClient
 
 def get_data_file(folderpath = "/data/"):
     assert_that(folderpath).exists()
@@ -36,15 +38,24 @@ def get_data(filepath):
 
     return res
 
-def write_data(conn, db_name,  data_arr):
-    list([conn[db_name][data['collection']].insert_one(data['items']) for data in data_arr])
+def write_data(db_client, db_name,  data_arr):
+    list([db_client[db_name][data['collection']].insert_one(data['items']) for data in data_arr])
 
-def get_db():
-    pass
+def get_connection_info(config_file = '/data/db.cfg'):
+    assert_that(config_file).exists()
+
+    defaults = cfg(config_file).defaults
+
+    return defaults
+    
+def get_db_client(connectInfo):
+    assert_that(connectionInfo).contains_key('db', 'db_port')
+    return MongoClient("mongodb://{}:{}".format(connectInfo['db'], connectInfo['db_port']))
+
 
 def main():
     (F(get_data)>> \
-     F(write_data, get_db(), get_db_name(get_data_file())))(get_data_file())
+     F(write_data, get_db_client(get_connection_info()), get_db_name(get_data_file())))(get_data_file())
 
 if __name__ == '__main__':
     main()
