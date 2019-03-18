@@ -1,6 +1,6 @@
 ---
 
-- name: publish microservice gate image
+- name: publish init_mongo image
   docker_image:
     name: "{{init_mongo_image_name}}"
     tag: "{{init_mongo_image_git_version}}"
