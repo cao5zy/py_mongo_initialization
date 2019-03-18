@@ -1,5 +1,6 @@
 [
   {"collection": "collection1",
-   "items": [{"name": "alan"}, {"name": "tracy"}]
+   "items": [{"name": "alan"}, {"name": "tracy"}],
+   "keys": ["name"]
   }
 ]

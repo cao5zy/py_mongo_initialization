@@ -41,6 +41,7 @@ def get_data(filepath):
     return res
 
 def write_data(db_client, db_name, data_arr):
+
     def insert(collection_name, arr, keys):
         assert_that(collection_name).is_not_empty()
         assert_that(keys).is_not_empty()
@@ -49,20 +50,19 @@ def write_data(db_client, db_name, data_arr):
         def not_existing(data):
             def get_args():
                 def dumy(dict_data):
-                    def setval(key):
+                    for key in keys:
                         dict_data[key] = data[key]
 
-                    list([setval(key) for key in keys])
-                    assert_that(dict).is_not_empty()
+                    assert_that(dict_data).is_not_empty()
                     
-                    return dict
+                    return dict_data
 
                 return dumy({})
                 
             def get_existing():
-                return db_client[db_name][collection_name].find(get_args())
-                
-            return True if keys is None else get_existing() is None
+                return db_client[db_name][collection_name].find_one(get_args())
+
+            return get_existing() is None
         
         def insert_item(data):
             assert_that(data).is_type_of(dict)
