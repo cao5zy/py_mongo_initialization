@@ -5,7 +5,8 @@ This is a repository for a docker image to facilitate the process of initializin
 # Docker command
 In docker command, it can be used as following:
 ```
-docker -rm -d -v /you_local_data:/data --link mongo_db_container:mongo_db_container alancao/init_mongo_db:1.0.0 python app.py
+docker -rm -d -v /you_local_data:/data --link mongo_db_container:mongo_db_container \
+alancao/init_mongo_db:1.0.0 python app.py
 ```
 ## `your_local_data`
 There should only contains two files in this folder, `db.cfg` and `[name].json`
