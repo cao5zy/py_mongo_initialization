@@ -32,4 +32,4 @@ The value of `[name]` will be used as the `database name` in mongo server. The s
 # Plan
 Currently, it doesn't support authentication. It will be added soon.
 
-Any problem please connect me in email <zongying_cao@163.com> or post an issue.
+Any problem please connect me in email <zongying_cao@163.com> or post an [issue](https://github.com/cao5zy/py_mongo_initialization/issues).
