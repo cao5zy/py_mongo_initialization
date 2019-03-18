@@ -1,0 +1,23 @@
+---
+- name: init image file folder
+  file:
+    path: "{{init_mongo_image_path}}"
+    state: directory
+
+- name: copy the Dockerfile
+  copy:
+    src: "./src/docker_image/Dockerfile"
+    dest: "{{init_mongo_image_path}}/Dockerfile"
+
+- name: copy the python files 
+  copy:
+    src: "./src/"
+    dest: "{{init_mongo_image_path}}"
+
+- name: build the init_mongo image
+  docker_image:
+    name: "{{init_mongo_image_name}}"
+    tag: "{{init_mongo_image_git_version}}"
+    path: "{{init_mongo_image_path}}"
+
+...

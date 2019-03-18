@@ -1,0 +1,15 @@
+- name: "deploy {{test_db}}"
+  docker_container:
+    name: "{{test_db}}"
+    image: "mongo:4.0"
+    state: started
+    exposed: "{{test_db_port}}"
+    entrypoint: "mongod --port={{test_db_port}} --bind_ip=0.0.0.0"
+  register: test_db_result
+
+- debug: var=test_db_result.ansible_facts.docker_container.NetworkSettings.IPAddress
+
+- set_fact:
+    test_db_ip: "{{ test_db_result.ansible_facts.docker_container.NetworkSettings.IPAddress }}"
+
+- debug: var=test_db_ip

@@ -1,0 +1,8 @@
+---
+public_prefix: ""
+public_port: 9005
+public_host: ""
+init_mongo_image_name: "init_mongo"
+init_mongo_image_git_version: "1.0.0"
+
+...
