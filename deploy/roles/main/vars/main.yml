@@ -1,0 +1,3 @@
+openresty_image_name: "alancao/openresty:1.0"
+init_mongo_image_path: "/.init_mongo_image"
+

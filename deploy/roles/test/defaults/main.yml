@@ -1,0 +1,5 @@
+---
+
+init_mongo_test_url: "http://{{public_host}}:{{public_port}}"
+
+...
