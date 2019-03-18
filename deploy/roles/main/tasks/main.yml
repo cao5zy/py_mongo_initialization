@@ -1,29 +1,19 @@
 ---
-- name: init microservice image file folder
+- name: init image file folder
   file:
     path: "{{init_mongo_image_path}}"
     state: directory
 
-- name: copy the image file from local
-  template:
-    src: "Dockerfile.template"
+- name: copy the Dockerfile
+  copy:
+    src: "./src/docker_image/Dockerfile"
     dest: "{{init_mongo_image_path}}/Dockerfile"
 
-- name: copy the nginx conf file from local
+- name: copy the python files 
   copy:
-    src: "nginx.conf"
-    dest: "{{init_mongo_image_path}}"
-
-- name: copy the lua-resty-mongo module to the image path
-  synchronize:
-    src: "./lua-resty-mongol"
-    dest: "{{init_mongo_image_path}}"
-
-- name: copy the validation code to the image path
-  synchronize:
     src: "./src/"
-    dest: "{{init_mongo_image_path}}/src"
-    
+    dest: "{{init_mongo_image_path}}"
+
 - name: build the init_mongo image
   docker_image:
     name: "{{init_mongo_image_name}}"

@@ -1,0 +1,40 @@
+---
+- name: init root folder
+  file:
+    path: "{{init_mongo_root}}"
+    state: directory
+
+- name: init root data folder
+  file:
+    path: "{{init_mongo_root}}/data"
+    state: directory
+
+- name: copy init script files
+  copy:
+    src: './'
+    dest: '{{init_mongo_root}}'
+
+- name: copy the data files
+  template:
+    src: './test_data/test_db.json'
+    dest: '{{init_mongo_root}}/data/test_db.json'
+
+- name: copy the db config
+  template:
+    src: './test_data/db.cfg.template'
+    dest: '{{init_mongo_root}}/data/db.cfg'
+
+- name: deploy the init mongo container
+  docker_container:
+    name: "{{init_mongo}}"
+    image: "{{init_mongo_image_name}}:{{init_mongo_image_git_version}}"
+    recreate: yes
+    links:
+      - "{{test_db}}:{{test_db}}"
+    volumes:
+      - "{{init_mongo_root}}/data:/data:Z"
+    entrypoint: python app.py
+
+
+
+...

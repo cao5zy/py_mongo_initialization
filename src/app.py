@@ -39,7 +39,17 @@ def get_data(filepath):
     return res
 
 def write_data(db_client, db_name,  data_arr):
-    list([db_client[db_name][data['collection']].insert_one(data['items']) for data in data_arr])
+    def insert(collection_name, arr):
+        assert_that(collection_name).is_not_empty()
+
+        def insert_item(data):
+            assert_that(data).is_type_of(dict)
+
+            db_client[db_name][collection_name].insert_one(data)
+
+        list([insert_item(data) for data in arr])
+        
+    list([insert(data['collection'], data['items']) for data in data_arr])
 
 def get_connection_info(config_file = '/data/db.cfg'):
     assert_that(config_file).exists()
@@ -48,9 +58,9 @@ def get_connection_info(config_file = '/data/db.cfg'):
 
     return defaults
     
-def get_db_client(connectInfo):
+def get_db_client(connectionInfo):
     assert_that(connectionInfo).contains_key('db', 'db_port')
-    return MongoClient("mongodb://{}:{}".format(connectInfo['db'], connectInfo['db_port']))
+    return MongoClient("mongodb://{}:{}".format(connectionInfo['db'], connectionInfo['db_port']))
 
 
 def main():

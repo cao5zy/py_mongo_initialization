@@ -1,0 +1,2 @@
+init_mongo: "{{public_prefix}}init_mongo"
+init_mongo_root: ".init_mongo"
