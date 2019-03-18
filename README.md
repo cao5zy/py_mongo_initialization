@@ -1,6 +1,6 @@
 # Initializing the data in mongo db container
 
-This is a repository for a docker image to facilitate the data in mongo db.
+This is a repository for a docker image to facilitate the process of initializing data in mongo db.
 
 # Docker command
 In docker command, it can be used as following:
