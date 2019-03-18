@@ -25,10 +25,15 @@ The value of `[name]` will be used as the `database name` in mongo server. The s
 [
   {
     "collection": "collection_name",
-    "items": [{"field1": "value1"}]
+    "items": [{"field1": "value1"}],
+    "keys": ["field1"]
   }
 ]
 ```
+- `collection` is the field to specify the collection name in mongo db.
+- `items` is the field to specify the objects in the collection.
+- `keys` is the field to specify which keys are to be filtered. `items` will not be inserted into the db if the keys are met.
+
 
 # Plan
 Currently, it doesn't support authentication. It will be added soon.
