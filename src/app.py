@@ -38,6 +38,8 @@ def get_data(filepath):
     assert_that(res).is_instance_of(list).is_not_empty()
     assert_that(res[0]).contains_key('collection', 'items', 'keys')
 
+    print(res)
+    
     return res
 
 def write_data(db_client, db_name, data_arr):
