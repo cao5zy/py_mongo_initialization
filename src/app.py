@@ -67,6 +67,8 @@ def write_data(db_client, db_name, data_arr):
             return get_existing() is None
         
         def insert_item(data):
+            print('insert item')
+            print(data)
             assert_that(data).is_type_of(dict)
 
             db_client[db_name][collection_name].insert_one(data)
@@ -96,4 +98,7 @@ def main():
     )(get_data_file())
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except Exception as ex:
+        print(ex)
